@@ -40,7 +40,7 @@ function isPalindrome(str) {
       /* if number of times a character occurs is odd, increase the count. This
        * is tracked dynamically as we loop through so we only have to iterate
        * through the string once rather than creating the hash table with one
-       * loop, then looping throguh the hash table again. This can save a lot of
+       * loop, then looping through the hash table again. This can save a lot of
        * time if we're using a gigantic character set.
        */
       if (charArray[str.charCodeAt(i)] % 2 === 1) {
