@@ -17,14 +17,18 @@ alter the approprate rows and columns on additional loops.
 function zeroMatrix(matrix) {
     // quit if matrix is blank
     if (matrix.length === 0) return 'empty matrix';
+    // keep track of the initial 0 coordinates
     let zeroes = [];
 
+    // push the coordinates of 0s into our tracker array
     for (let row = 0; row < matrix.length; row++) {
         for (let column = 0; column < matrix[row].length; column++) {
             if (matrix[row][column] === 0) zeroes.push([row, column])
         }
     }
 
+    // replace each item in our matrix with a 0 if its row or column value
+    // matches the row or column of any of the initial 0s
     for (let i = 0; i < zeroes.length; i++) {
         for (let row = 0; row < matrix.length; row++) {
             for (let column = 0; column < matrix[row].length; column++) {
