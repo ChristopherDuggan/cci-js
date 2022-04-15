@@ -16,17 +16,11 @@ In order to do so, we can iterate through s1, looking for a character that
 matches the first character of s2. Once we hit that character, we can iterate
 through the following characters on both strings and return true if they match.
 
-We can quickly return false if we hit a few conditions:
--   if s1 or s2 is empty
--   if s2 is longer than s1
 */
 
 
 function isSubString(s1, s2) {
     let match = false;
-    if (s1.length < 1 
-        || s2.length < 1
-        || s2.length > s1.length) return match;
 
     for (let i = 0; i < s1.length; i++) {
 
@@ -38,6 +32,7 @@ function isSubString(s1, s2) {
             for (let j = 0; j < s2.length; j++) {
                if (s1.charAt(i+j) !== s2.charAt(j)) match = false;
             }
+            if (match) return match;
         }
     }
     return match
@@ -46,4 +41,23 @@ function isSubString(s1, s2) {
 
 //console.log(isSubString('hbedabc123', 'abc'));
 
+/*
+If s2 is a rotation of s1 (waterbottle -> erbottlewat) it is the same string as
+s1 but the starting character is transposed to later in the string and the exact
+length is maintained by putting the characters that "overflow" the original
+length at the beginning of the string (in the same order). This means that if we
+concatenate s2 to itself, the original string of s1 (if it is a match) will
+appear in s2. (waterbottle -> erbottle[[[waterbottle]]]wat). That means we can
+take that doubled s2 and check to see if s1 is a substring of it.
+*/
 
+function isRotation(s1, s2) {
+    s2 += s2
+    // console.log("s2: ", s2, "s1: ", s1)
+    return isSubString(s2, s1)
+}
+
+console.log(isRotation('abc', 'bcacba'));
+console.log(isRotation('abcdefg', 'efgabcd'));
+console.log(isRotation('abc', 'cba'));
+console.log(isRotation('abc', 'cbasthaoue'));
